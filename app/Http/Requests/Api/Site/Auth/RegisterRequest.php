@@ -24,7 +24,8 @@ class RegisterRequest extends FormRequest
     {
         return [
             'username'=>'required|unique:users,username',
-            'mobile'=>'required|unique:users,mobile',
+            'mobile'=>'required|unique:users,mobile|regex:/^\+2010\d{9}$/',
+            'email'=>'required|email|unique:users,email',
             'password'=>'required|min:6|confirmed',
         ];
     }

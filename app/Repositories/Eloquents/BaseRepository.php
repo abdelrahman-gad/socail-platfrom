@@ -38,6 +38,12 @@ class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->paginate($perPage);
     }
+
+    public function sortBy($column, $direction)
+    {
+        return $this->model->orderBy($column, $direction);
+    }
+
     public function  where($column, $value)
     {
         return $this->model->where($column, $value);

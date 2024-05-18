@@ -24,13 +24,8 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'max:2000'],
-            'images.*' => ['nullable', 'image'],
-            'deleted_images.*' => ['nullable', 'int'],
-            'image_positions.*' => ['nullable', 'int'],
-            'categories.*' => ['nullable', 'int', 'exists:categories,id'],
-            'description' => ['nullable', 'string'],
-            'published' => ['required', 'boolean']
+            'title' => ['required', 'max:512'],
+            'description' => ['nullable', 'string', 'max:2048'],
         ];
     }
 }

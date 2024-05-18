@@ -49,7 +49,7 @@ $categoryList = \App\Models\Category::getActiveAsTree();
 
     <?php if ( $posts->count() === 0 ): ?>
     <div class="text-center text-gray-600 py-16 text-xl">
-        There are no products published
+        There are no post published
     </div>
     <?php else: ?>
     <div

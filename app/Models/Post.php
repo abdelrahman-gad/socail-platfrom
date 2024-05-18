@@ -12,11 +12,11 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'published', 'created_by', 'updated_by'];
+    protected $fillable = ['title', 'description', 'created_by', 'updated_by'];
 
     public function author(): HasOne
     {
-        return $this->hasOne(User::class,'created_by');
+        return $this->hasOne(User::class,'id','created_by');
     }
 
 }

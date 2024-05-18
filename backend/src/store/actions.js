@@ -61,8 +61,7 @@ export function createPost({commit}, post) {
     form.append('title', post.title);
     post.images.forEach(im => form.append('images[]', im))
     form.append('description', post.description || '');
-    form.append('published', post.published ? 1 : 0);
-    
+   
     post = form;
   }
   return axiosClient.post('/posts', post)
@@ -82,7 +81,7 @@ export function updatePost({commit}, post) {
       form.append(`image_positions[${id}]`, post.image_positions[id])
     }
     form.append('description', post.description || '');
-    form.append('published', post.published ? 1 : 0);
+    
     form.append('_method', 'PUT');
     post = form;
   } else {

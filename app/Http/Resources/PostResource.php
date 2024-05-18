@@ -20,8 +20,7 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,   
             'description' => $this->description,
-            'published' => (bool)$this->published, 
-            'author' => $this->author->name,
+            'author' => $this->author?->name,
             'created_at' => (new \DateTime($this->created_at))->format('Y-m-d H:i:s'),
             'updated_at' => (new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
 

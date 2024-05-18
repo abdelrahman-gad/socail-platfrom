@@ -13,7 +13,6 @@
         <div class="col-span-2 px-4 pt-5 pb-4">
           <CustomInput class="mb-2" v-model="posts.title" label="Post Title" :errors="errors['title']"/>
           <CustomInput type="richtext" class="mb-2" v-model="posts.description" label="Description" :errors="errors['description']"/>
-          <CustomInput type="checkbox" class="mb-2" v-model="posts.published" label="Published" :errors="errors['published']"/>
         </div>
         <div class="col-span-1 px-4 pt-5 pb-4">
           <image-preview v-model="posts.images"
@@ -67,7 +66,6 @@ const posts = ref({
   deleted_images: [],
   image_positions: {},
   description: '',
-  published: false,
 })
 
 const errors = ref({});
