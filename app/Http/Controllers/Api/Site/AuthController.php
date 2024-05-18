@@ -16,14 +16,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use App\Traits\FileStorageHandler;
+
 use Exception;
 use Illuminate\Support\Facades\Log;
-use  Illuminate\Support\Carbon;
 
 class AuthController extends Controller {
 
-    use FileStorageHandler;
 
     protected TwilioOtpService  $twilioOtpService;
     protected UserRepository $userRepository;
@@ -68,10 +66,7 @@ class AuthController extends Controller {
 
     public function register( RegisterRequest $request ): JsonResponse {
 
-        if ( $request->hasFile( 'avatar' ) ) {
-            $avatar = $this->storeFile( $request->image );
-        }
-
+       
         $userReq = [
             'name'=> $request->name,
             'username'=> $request->username,

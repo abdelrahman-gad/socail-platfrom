@@ -36,11 +36,12 @@ class PostController extends Controller
 
     public function show($id):JsonResponse{
 
-        $post = $this->postRepository->whereColumns(['is_active'=>true])
-                ->with([
-                    'author' => function($q){
-                        $q->select('id','name');
-                }])->findOrFail( $id );
+        $post = $this->postRepository
+                        ->with([
+                            'author' => function($q){
+                                $q->select('id','name');
+                        }])
+                        ->findOrFail( $id );
 
 
         return (new PostResource($post))->response();

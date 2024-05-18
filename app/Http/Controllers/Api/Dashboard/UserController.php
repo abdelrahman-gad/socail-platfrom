@@ -8,9 +8,17 @@ use App\Http\Requests\Api\Dashboard\User\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Repositories\Eloquents\UserRepository;
 
 class UserController extends Controller
 {
+
+    protected UserRepository $userRepository;
+
+    function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,9 +31,11 @@ class UserController extends Controller
         $sortField = request('sort_field', 'updated_at');
         $sortDirection = request('sort_direction', 'desc');
 
-        $query = User::query()
-            ->orderBy($sortField, $sortDirection)
-            ->whereAnyLike(['name', 'email','username','mobile'], $search)
+        $query = $this->userRepository->whereColumns([
+            'name' => $search,
+            'email' => $search,
+        ])
+            ->sortBy($sortField, $sortDirection)
             ->paginate($perPage);
 
         return UserResource::collection($query);
@@ -47,7 +57,7 @@ class UserController extends Controller
         $data['created_by'] = $request->user()->id;
         $data['updated_by'] = $request->user()->id;
 
-        $user = User::create($data);
+        $user = $this->userRepository->create($data);
 
         return new UserResource($user);
     }
@@ -68,7 +78,7 @@ class UserController extends Controller
         }
         $data['updated_by'] = $request->user()->id;
 
-        $user->update($data);
+        $user = $this->userRepository->update($user->id, $data);
 
         return new UserResource($user);
     }
@@ -81,7 +91,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        $this->userRepository->delete($user->id);
 
         return response()->noContent();
     }

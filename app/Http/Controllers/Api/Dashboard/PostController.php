@@ -7,9 +7,17 @@ use App\Http\Requests\Api\Dashboard\Post\PostRequest;
 use App\Http\Resources\PostListResource;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Repositories\Eloquents\PostRepository;
 
 class PostController extends Controller
 {
+    protected PostRepository $postRepository;
+
+    function __construct(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,11 +30,13 @@ class PostController extends Controller
         $sortField = request('sort_field', 'created_at');
         $sortDirection = request('sort_direction', 'desc');
 
-        $query = Post::query()
-            ->whereHas('author')
-            ->where('title', 'like', "%{$search}%")
-            ->orderBy($sortField, $sortDirection)
-            ->paginate($perPage);
+        $query = $this->postRepository->whereColumns([
+            'title' => $search,
+            'content' => $search,
+        ])
+        ->with(['author'])
+        ->sortBy($sortField, $sortDirection)
+        ->paginate($perPage);
 
         return PostListResource::collection($query);
     }
@@ -43,8 +53,7 @@ class PostController extends Controller
         $data['created_by'] = $request->user()->id;
         $data['updated_by'] = $request->user()->id;
 
-
-        $post = Post::create($data);
+        $post = $this->postRepository->create($data);
 
         return new PostResource($post);
     }
@@ -57,6 +66,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post = $this->postRepository->find($post->id);
         return new PostResource($post);
     }
 
@@ -71,7 +81,8 @@ class PostController extends Controller
     {
         $data = $request->validated();
         $data['updated_by'] = $request->user()->id;
-        $post->update($data);
+       
+        $this->postRepository->update($post->id, $data);
 
         return new PostResource($post);
     }
@@ -84,7 +95,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
+        $this->postRepository->delete($post->id);
 
         return response()->noContent();
     }

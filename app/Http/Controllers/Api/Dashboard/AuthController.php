@@ -7,8 +7,13 @@ use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class AuthController extends Controller
 {
+   
+   
+
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -16,8 +21,10 @@ class AuthController extends Controller
             'password' => 'required',
             'remember' => 'boolean'
         ]);
+
         $remember = $credentials['remember'] ?? false;
         unset($credentials['remember']);
+
         if (!Auth::attempt($credentials, $remember)) {
             return response([
                 'message' => 'Email or password is incorrect'
@@ -34,7 +41,9 @@ class AuthController extends Controller
                 'message' => 'Your email address is not verified'
             ], 403);
         }
+
         $token = $user->createToken('main')->plainTextToken;
+
         return response([
             'user' => new UserResource($user),
             'token' => $token
@@ -55,5 +64,5 @@ class AuthController extends Controller
     {
         return new UserResource($request->user());
     }
-    
+
 }
