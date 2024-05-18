@@ -4,22 +4,20 @@ namespace App\Mail;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Collection;
 
-class NewOrderEmail extends Mailable
+class DailyRegisteredUsersReport extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(public Order $order, public $forAdmin = true)
+    public Collection $users;
+    
+    public function __construct(Collection $users)
     {
 
+        $this->users = $users;
     }
 
     /**
@@ -30,7 +28,7 @@ class NewOrderEmail extends Mailable
     public function build()
     {
         return $this
-            ->subject('New Order')
-            ->view('mail.new-order');
+            ->subject('Daily Registered Users Report')
+            ->view('mail.admin.daily-registered-users-report');
     }
 }
