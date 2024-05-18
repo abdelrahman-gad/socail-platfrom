@@ -5,16 +5,16 @@
         <div x-data="{
             cartItems: {{
                 json_encode(
-                    $products->map(fn($product) => [
-                        'id' => $product->id,
-                        'slug' => $product->slug,
-                        'image' => $product->image ?: '/img/noimage.png',
-                        'title' => $product->title,
-                        'price' => $product->price,
-                        'quantity' => $cartItems[$product->id]['quantity'],
-                        'href' => route('product.view', $product->slug),
-                        'removeUrl' => route('cart.remove', $product),
-                        'updateQuantityUrl' => route('cart.update-quantity', $product)
+                    $posts->map(fn($post) => [
+                        'id' => $post->id,
+                        'slug' => $post->slug,
+                        'image' => $post->image ?: '/img/noimage.png',
+                        'title' => $post->title,
+                        'price' => $post->price,
+                        'quantity' => $cartItems[$post->id]['quantity'],
+                        'href' => route('product.view', $post->slug),
+                        'removeUrl' => route('cart.remove', $post),
+                        'updateQuantityUrl' => route('cart.update-quantity', $post)
                     ])
                 )
             }},
@@ -22,10 +22,10 @@
                 return this.cartItems.reduce((accum, next) => accum + next.price * next.quantity, 0).toFixed(2)
             },
         }" class="bg-white p-4 rounded-lg shadow">
-            <!-- Product Items -->
+            <!-- Post Items -->
             <template x-if="cartItems.length">
                 <div>
-                    <!-- Product Item -->
+                    <!-- Post Item -->
                     <template x-for="product of cartItems" :key="product.id">
                         <div x-data="productItem(product)">
                             <div
@@ -61,11 +61,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--/ Product Item -->
+                            <!--/ Post Item -->
                             <hr class="my-5"/>
                         </div>
                     </template>
-                    <!-- Product Item -->
+                    <!-- Post Item -->
 
                     <div class="border-t border-gray-300 pt-4">
                         <div class="flex justify-between">
@@ -84,7 +84,7 @@
                         </form>
                     </div>
                 </div>
-                <!--/ Product Items -->
+                <!--/ Post Items -->
             </template>
             <template x-if="!cartItems.length">
                 <div class="text-center py-8 text-gray-500">

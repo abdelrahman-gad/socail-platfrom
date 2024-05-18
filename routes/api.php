@@ -1,13 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\CustomerController;
-use App\Http\Controllers\Api\DashboardController;
-use App\Http\Controllers\Api\OrderController;
-use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\ReportController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,18 +12,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-    Route::get('/user', [\App\Http\Controllers\Api\AuthController::class, 'getUser']);
-    Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
-    Route::apiResource('posts', ProductController::class);
-    Route::apiResource('users', UserController::class);
-    // Dashboard Routes
-    
-    Route::get('/dashboard/users-count', [DashboardController::class, 'activeCustomers']);
+require  __DIR__.'/site.php';
+require __DIR__.'/admin.php';
 
-    Route::get('/dashboard/posts-count', [DashboardController::class, 'activeProducts']);
-    
-});
-
-Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);

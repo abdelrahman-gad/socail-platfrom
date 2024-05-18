@@ -23,20 +23,20 @@
     <table class="table-auto w-full">
       <thead>
       <tr>
-        <TableHeaderCell field="id" :sort-field="sortField" :sort-direction="sortDirection" @click="sortProducts('id')">
+        <TableHeaderCell field="id" :sort-field="sortField" :sort-direction="sortDirection" @click="sortPosts('id')">
           ID
         </TableHeaderCell>
         <TableHeaderCell field="image" :sort-field="sortField" :sort-direction="sortDirection">
           Image
         </TableHeaderCell>
         <TableHeaderCell field="title" :sort-field="sortField" :sort-direction="sortDirection"
-                         @click="sortProducts('title')">
+                         @click="sortPosts('title')">
           Title
         </TableHeaderCell>
        
       
         <TableHeaderCell field="updated_at" :sort-field="sortField" :sort-direction="sortDirection"
-                         @click="sortProducts('updated_at')">
+                         @click="sortPosts('updated_at')">
           Last Updated At
         </TableHeaderCell>
         <TableHeaderCell field="actions">
@@ -119,7 +119,7 @@
                         active ? 'bg-indigo-600 text-white' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
-                      @click="deleteProduct(post)"
+                      @click="deletePost(post)"
                     >
                       <TrashIcon
                         :active="active"
@@ -212,7 +212,7 @@ function getPosts(url = null) {
   });
 }
 
-function sortProducts(field) {
+function sortPosts(field) {
   if (field === sortField.value) {
     if (sortDirection.value === 'desc') {
       sortDirection.value = 'asc'
@@ -227,11 +227,11 @@ function sortProducts(field) {
   getPosts()
 }
 
-function deleteProduct(post) {
+function deletePost(post) {
   if (!confirm(`Are you sure you want to delete the post?`)) {
     return
   }
-  store.dispatch('deleteProduct', post.id)
+  store.dispatch('deletePost', post.id)
     .then(res => {
       store.commit('showToast', 'Post was successfully deleted');
       store.dispatch('getPosts')

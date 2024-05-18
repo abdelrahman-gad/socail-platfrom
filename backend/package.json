@@ -6,7 +6,7 @@
         "dev": "vite --port=3000",
         "build": "vite build",
         "preview": "vite preview",
-        "watch": "vite"
+        "watch": "npm run dev"
     },
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^39.0.1",

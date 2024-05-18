@@ -1,19 +1,19 @@
 <x-app-layout>
     <div  x-data="productItem({{ json_encode([
-                    'id' => $product->id,
-                    'slug' => $product->slug,
-                    'image' => $product->image ?: '/img/noimage.png',
-                    'title' => $product->title,
-                    'price' => $product->price,
-                    'quantity' => $product->quantity,
-                    'addToCartUrl' => route('cart.add', $product)
+                    'id' => $post->id,
+                    'slug' => $post->slug,
+                    'image' => $post->image ?: '/img/noimage.png',
+                    'title' => $post->title,
+                    'price' => $post->price,
+                    'quantity' => $post->quantity,
+                    'addToCartUrl' => route('cart.add', $post)
                 ]) }})" class="container mx-auto">
         <div class="grid gap-6 grid-cols-1 lg:grid-cols-5">
             <div class="lg:col-span-3">
                 <div
                     x-data="{
-                      images: {{$product->images->count() ?
-                 $product->images->map(fn($im) => $im->url) : json_encode(['/img/noimage.png'])}},
+                      images: {{$post->images->count() ?
+                 $post->images->map(fn($im) => $im->url) : json_encode(['/img/noimage.png'])}},
                       activeImage: null,
                       prev() {
                           let index = this.images.indexOf(this.activeImage);
@@ -95,10 +95,10 @@
             </div>
             <div class="lg:col-span-2">
                 <h1 class="text-lg font-semibold">
-                    {{$product->title}}
+                    {{$post->title}}
                 </h1>
-                <div class="text-xl font-bold mb-6">${{$product->price}}</div>
-                @if ($product->quantity === 0)
+                <div class="text-xl font-bold mb-6">${{$post->price}}</div>
+                @if ($post->quantity === 0)
                     <div class="bg-red-400 text-white py-2 px-3 rounded mb-3">
                         The product is out of stock
                     </div>
@@ -144,7 +144,7 @@
                         x-collapse.min.120px
                         class="text-gray-500 wysiwyg-content"
                     >
-                        {!! $product->description !!}
+                        {!! $post->description !!}
                     </div>
                     <p class="text-right">
                         <a
