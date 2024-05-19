@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\Admin;
+namespace Tests\Feature\Api\Dahboard;
 
 use Tests\TestCase;
 use App\Models\User;    
