@@ -36,7 +36,7 @@ Make sure you have environment setup properly. You will need MySQL, PHP8.1, Node
 9. Run `npm install`
 10. Run `npm run dev` to start vite server for Laravel frontend
 11. Open postman
-12. Import Postman Collection And Environment 
+12. Import Postman Collection And Environment  https://documenter.getpostman.com/view/4823675/2sA3QmCZps
 13. Navigate to Site\Auth\Login ```
     +201022893367
     password
