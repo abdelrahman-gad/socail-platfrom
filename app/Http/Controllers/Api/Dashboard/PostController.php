@@ -26,17 +26,13 @@ class PostController extends Controller
     public function index()
     {
         $perPage = request('per_page', 10);
-        $search = request('search', '');
         $sortField = request('sort_field', 'created_at');
         $sortDirection = request('sort_direction', 'desc');
 
-        $query = $this->postRepository->whereColumns([
-            'title' => $search,
-            'content' => $search,
-        ])
-        ->with(['author'])
-        ->sortBy($sortField, $sortDirection)
-        ->paginate($perPage);
+        $query = $this->postRepository
+                        ->with(['author'])
+                        ->orderBy($sortField, $sortDirection)
+                        ->paginate($perPage);
 
         return PostListResource::collection($query);
     }

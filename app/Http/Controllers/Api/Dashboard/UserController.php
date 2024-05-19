@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Repositories\Eloquents\UserRepository;
 
+
 class UserController extends Controller
 {
 
@@ -27,15 +28,12 @@ class UserController extends Controller
     public function index()
     {
         $perPage = request('per_page', 10);
-        $search = request('search', '');
+        $search = request('search');
         $sortField = request('sort_field', 'updated_at');
         $sortDirection = request('sort_direction', 'desc');
 
-        $query = $this->userRepository->whereColumns([
-            'name' => $search,
-            'email' => $search,
-        ])
-            ->sortBy($sortField, $sortDirection)
+        $query = $this->userRepository
+            ->orderBy($sortField, $sortDirection)
             ->paginate($perPage);
 
         return UserResource::collection($query);
@@ -72,13 +70,14 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $data = $request->validated();
-
+       
         if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
-        $data['updated_by'] = $request->user()->id;
 
-        $user = $this->userRepository->update($user->id, $data);
+        $data['updated_by'] = auth()->id();
+
+        $this->userRepository->update($user->id, $data);
 
         return new UserResource($user);
     }
@@ -94,4 +93,10 @@ class UserController extends Controller
         $this->userRepository->delete($user->id);
         return response()->noContent();
     }
+
+    public function show(User $user){
+
+        return (new UserResource($user))->response();
+    }
+
 }

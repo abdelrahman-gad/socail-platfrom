@@ -11,12 +11,13 @@ class BaseRepository implements BaseRepositoryInterface
     {
        $this->model = new Model();
     }
-    public function  create($data)
+
+    public function  create( $data)
     {
         return $this->model->create($data);
     }
 
-    public function  update( $id,$data)
+    public function  update( $id, $data)
     {
         $record = $this->find($id);
         return $record->update($data);
@@ -39,7 +40,7 @@ class BaseRepository implements BaseRepositoryInterface
         return $this->model->paginate($perPage);
     }
 
-    public function sortBy($column, $direction)
+    public function orderBy($column, $direction)
     {
         return $this->model->orderBy($column, $direction);
     }

@@ -42,7 +42,7 @@ class AuthController extends Controller
             ], 403);
         }
 
-        $token = $user->createToken('main')->plainTextToken;
+        $token =  $user->createToken(config('sanctum.jwt-secret'),['admin'])->plainTextToken;
 
         return response([
             'user' => new UserResource($user),

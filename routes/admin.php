@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Route;
 Route::
     prefix('admin')
     ->group(function(){
-       Route::middleware(['auth:sanctum', 'admin'])
+       Route::middleware(['auth:sanctum', 'abilities:admin'])
             ->group(function () {
+
                 Route::get('/user', [AuthController::class, 'getUser']);
                 Route::post('/logout', [AuthController::class, 'logout']);
 
