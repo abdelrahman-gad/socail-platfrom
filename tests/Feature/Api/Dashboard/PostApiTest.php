@@ -5,7 +5,6 @@ namespace Tests\Feature\Api\Dashboard;
 use Tests\TestCase;
 use App\Models\User;    
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Artisan;
 
 class PostApiTest extends TestCase
 {
