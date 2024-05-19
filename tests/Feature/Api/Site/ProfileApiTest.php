@@ -16,7 +16,6 @@ class ProfileApiTest extends TestCase
     {
         parent::setUp();
         Artisan::call( 'db:seed', [ '--class' => 'PlainUserSeeder' ] );
-
     }
 
     public function test_user_can_show_profile()
@@ -24,7 +23,7 @@ class ProfileApiTest extends TestCase
         $user = User::first();
 
         $response = $this->actingAs( $user, 'user-api' )->get( '/api/site/show-profile' );
-        
+
         $response->assertStatus( 200 );
     }
 

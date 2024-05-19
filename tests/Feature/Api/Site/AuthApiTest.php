@@ -2,13 +2,10 @@
 
 namespace Tests\Feature\Api\Site;
 
-use App\Models\Otp;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
 
 class AuthApiTest extends TestCase
 {
@@ -17,7 +14,6 @@ class AuthApiTest extends TestCase
     function setUp(): void
     {
         parent::setUp();
-        // Artisan::call( 'db:seed', [ '--class' => 'PlainUserSeeder' ] );
     }
 
     public function test_user_can_login()

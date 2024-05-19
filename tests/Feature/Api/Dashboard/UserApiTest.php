@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\Dahboard;
+namespace Tests\Feature\Api\Dashboard;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,9 +15,8 @@ class UserApiTest extends TestCase
     function setUp(): void
     {
         parent::setUp();
-        // Artisan::call( 'db:seed', [ '--class' => 'PlainUserSeeder' ] );
     }
-    
+
     function test_admin_can_list_users(){
         $admin = User::factory()->create();
         $admin->is_admin = 1;
