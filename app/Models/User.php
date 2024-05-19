@@ -52,4 +52,13 @@ class User extends Authenticatable implements MustVerifyEmail
    public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany{
     return $this->hasMany(Post::class,'created_by');
    }
+
+   public function otp(): \Illuminate\Database\Eloquent\Relations\HasOne{
+    return $this->hasOne(Otp::class,'user_id');
+   }
+
+   public function authenticate(){
+    return $this->createToken('user-api',['user'])->plainTextToken;
+   }
+
 }
