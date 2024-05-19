@@ -6,6 +6,7 @@ Make sure you have environment setup properly. You will need MySQL, PHP8.1, Node
 1. Download the project (or clone using GIT)
 2. Copy `.env.example` into `.env` and configure database credentials 
 3. Update `.env` variables 
+`
 
         DB_DATABASE=dbname
         DB_USERNAME=dbusername
@@ -24,9 +25,6 @@ Make sure you have environment setup properly. You will need MySQL, PHP8.1, Node
         TWILIO_FROM=xxxxxxxxxxx
 
         JWT_SECRET=test-jwt-token
-
-        `
-
         `
 4. Navigate to the project's root directory using terminal
 5. Run `composer install`
