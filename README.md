@@ -4,7 +4,30 @@ Make sure you have environment setup properly. You will need MySQL, PHP8.1, Node
 
 ### Install Laravel Website + API
 1. Download the project (or clone using GIT)
-2. Copy `.env.example` into `.env` and configure database credentials
+2. Copy `.env.example` into `.env` and configure database credentials 
+3. Update `.env` variables 
+
+        DB_DATABASE=dbname
+        DB_USERNAME=dbusername
+        DB_PASSWORD=dbpassword
+        
+
+        VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+        VITE_PUSHER_HOST="${PUSHER_HOST}"
+        VITE_PUSHER_PORT="${PUSHER_PORT}"
+        VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+        VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+
+        TWILIO_SID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        TWILIO_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        TWILIO_FROM=xxxxxxxxxxx
+
+        JWT_SECRET=test-jwt-token
+
+        `
+
+        `
 3. Navigate to the project's root directory using terminal
 4. Run `composer install`
 5. Set the encryption key by executing `php artisan key:generate --ansi`
@@ -15,9 +38,10 @@ Make sure you have environment setup properly. You will need MySQL, PHP8.1, Node
 10. Run `npm run dev` to start vite server for Laravel frontend
 11. Open postman
 12. Import Postman Collection And Environment  https://documenter.getpostman.com/view/4823675/2sA3QmCZps
-13. Navigate to Site\Auth\Login ```
-    +201022893367
-    password
+13. Navigate to Site\Auth\Login
+    ```
+     +201022893367
+     password
     ```
 14. run `php artisan test` to check test cases
 
