@@ -10,7 +10,7 @@ Make sure you have environment setup properly. You will need MySQL, PHP8.1, Node
         DB_DATABASE=dbname
         DB_USERNAME=dbusername
         DB_PASSWORD=dbpassword
-        
+
 
         VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
         VITE_PUSHER_HOST="${PUSHER_HOST}"
@@ -28,22 +28,22 @@ Make sure you have environment setup properly. You will need MySQL, PHP8.1, Node
         `
 
         `
-3. Navigate to the project's root directory using terminal
-4. Run `composer install`
-5. Set the encryption key by executing `php artisan key:generate --ansi`
-6. Run migrations and seeds `php artisan install:project`
-7. Start local server by executing `php artisan serve`
-8. Open new terminal and navigate to the project root directory
-9. Run `npm install`
-10. Run `npm run dev` to start vite server for Laravel frontend
-11. Open postman
-12. Import Postman Collection And Environment  https://documenter.getpostman.com/view/4823675/2sA3QmCZps
-13. Navigate to Site\Auth\Login
+4. Navigate to the project's root directory using terminal
+5. Run `composer install`
+6. Set the encryption key by executing `php artisan key:generate --ansi`
+7. Run migrations and seeds `php artisan install:project`
+8. Start local server by executing `php artisan serve`
+9. Open new terminal and navigate to the project root directory
+10. Run `npm install`
+11. Run `npm run dev` to start vite server for Laravel frontend
+12. Open postman
+13. Import Postman Collection And Environment  https://documenter.getpostman.com/view/4823675/2sA3QmCZps
+14. Navigate to Site\Auth\Login
     ```
      +201022893367
      password
     ```
-14. run `php artisan test` to check test cases
+15. run `php artisan test` to check test cases
 
 
 ### Install Vue.js Admin Panel
